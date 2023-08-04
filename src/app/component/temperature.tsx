@@ -8,7 +8,7 @@ export default function Temperature({city, setCity}:{city:string, setCity:any}) 
     
     const [searchCity, setSearchCity] = useState<string>("curitiba")
     const [temperature, setTemperature] = useState<any>()
-    const APIKEY = '837cd98f4f9cdd0be34f19020a0a6f88'
+    const APIKEY = process.env.WEATHER_KEY
 
     const handleKeyPress = (e:any) => {
         if (e.key === "Enter") {
@@ -20,7 +20,7 @@ export default function Temperature({city, setCity}:{city:string, setCity:any}) 
         axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&lang=pt_br&units=metric`)
             .then( res => setTemperature(res.data) )
             .catch( res => console.error(res.data) )
-    },[city])
+    },[APIKEY, city])
 
     return (
         <div className="bg-neutral-100 bg-opacity-20 rounded-2xl">

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export default function FullImage({city}:{city:string}) {
 
     const [image, setImage] = useState<any[]>([])
-    const accessKey = 'GyAJfX7_CLvA02-_zT8ePe1OjD6cRVvSxgGaM4Xg62Y';
+    const accessKey = process.env.UNSPLASH_KEY
 
     useEffect(() => {
         axios.get(`https://api.unsplash.com/search/photos/?client_id=${accessKey}`, {
@@ -21,7 +21,7 @@ export default function FullImage({city}:{city:string}) {
           }
         )
         .catch( (err) => console.error(err.data) )
-      },[city])
+      },[accessKey, city])
 
     return (
         <div className="w-screen h-screen"> 
